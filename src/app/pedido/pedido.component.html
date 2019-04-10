@@ -1,0 +1,46 @@
+
+<div class="container" style="margin-top: 15px;">
+  <div style="background-color: #007bff;text-align: center;border-radius: 14px;width: 207px;color: white;">
+      <label>Ingredientes disponíveis</label>
+    </div>
+  <div class="table-responsive table-bordered">
+      <table class="table table-striped">
+        <tr>
+          <th>Produtos</th>
+          <th>Preço</th>
+          <th ></th>
+        </tr>
+
+        <tr *ngFor="let ingredient of ingredients">
+            <td>{{ingredient.desc}}</td>
+            <td>R$ {{ingredient.valueMoney}}</td>
+            <td align="center">
+              <button class="btn" type="button" (click) ="addToOrder(ingredient)"><i class="fa fa-plus"></i></button>
+            </td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+<div class="container" style="margin-top: 15px;">
+  <div style="background-color: #007bff;text-align: center;border-radius: 14px;width: 103px;color: white;">
+    <label>Pedido</label>
+  </div>
+  <div class="table-responsive table-bordered">
+      <table class="table table-striped">
+          <th>Ingrediente</th>
+          <th >Valor</th>
+          <th ></th>
+
+        <tr *ngFor="let ingredient2 of ingredients2; index as i">
+            <td>{{ingredient2.desc}}</td>
+            <td>
+              R$ {{ingredient2.valueMoney}} 
+            </td>
+            <td align="center">
+              <button class="btn" (click) ="removeOrder(i)"><i class="fa fa-trash"></i></button>
+            </td>
+        </tr>
+      </table>
+  </div>
+</div>
