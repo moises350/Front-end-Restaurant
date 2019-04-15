@@ -10,31 +10,13 @@
           <th >Ingredientes</th>
         </tr>
 
-        <tr>
-            <td>X-Bacon</td>
+        <tr *ngFor="let menu of menus">
+            <td>{{menu.nome}}</td>
             <td>
-              Bacon, hambúrguer de carne e queijo
+              {{menu.descricao}}
             </td>
-        </tr>
-
-        <tr>
-            <td>X-Burguer</td>
-            <td>
-              Hambúrguer de carne e queijo
-            </td>
-        </tr>
-
-        <tr>
-            <td>X-Egg</td>
-            <td>
-              Ovo, hambúrguer de carne e queijo
-            </td>
-        </tr>
-
-        <tr>
-            <td>X-Egg-Bacon</td>
-            <td>
-              Ovo, bacon, hambúrguer de carne e queijo
+            <td align="center">
+              <button type="button" (click) ="addToOrder(menu)"><i class="fa fa-plus"></i></button>
             </td>
         </tr>
       </table>
@@ -48,17 +30,17 @@
   </div>
   <div class="table-responsive table-bordered">
       <table class="table table-striped">
-          <th>Ingrediente</th>
-          <th >Valor</th>
+          <th>Lanche</th>
+          <th >Descrição</th>
           <th ></th>
 
-        <tr >
-            <td>teste</td>
+        <tr *ngFor="let menu2 of menus2; index as i">
+            <td>{{menu2.nome}}</td>
             <td>
-              R$ teste 
+              {{menu2.descricao}}
             </td>
             <td align="center">
-              <button class="btn"><i class="fa fa-trash"></i></button>
+              <button (click) ="removeOrder(i)"><i class="fa fa-trash"></i></button>
             </td>
         </tr>
       </table>

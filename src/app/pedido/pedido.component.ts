@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../models/ingredient.model';
+import { HttpClient } from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-pedido',
@@ -8,44 +11,17 @@ import { Ingredient } from '../models/ingredient.model';
 })
 export class PedidoComponent implements OnInit {
 
-  ingredients: Ingredient[] = [
-    {
-      id: 1,
-      desc: 'Alface',
-      valueMoney: 0.40
-    },
-    {
-      id: 2,
-      desc: 'Bacon',
-      valueMoney: 2.00
-    },
-
-    {
-      id: 3,
-      desc: 'Hamburguer de Carne',
-      valueMoney: 3.00
-    },
-
-    {
-      id: 4,
-      desc: 'Ovo',
-      valueMoney: 0.80
-    },
-
-    {
-      id: 5,
-      desc: 'Queijo',
-      valueMoney: 1.50
-    }
-  ]
+  ingredients: Ingredient[] = [];
 
   ingredients2: Ingredient[] = [];
 
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    
+    this.getIngredientes().subscribe(response => {
+        this.ingredients = response;
+      });
   }
 
   addToOrder(ingredient)
@@ -56,6 +32,18 @@ export class PedidoComponent implements OnInit {
   removeOrder(index)
   {
     this.ingredients2.splice(index,1);
+  }
+
+  getIngredientes(): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/ingredientes`)
+      .pipe(map(response => {
+          return response;
+        })
+      );
+  }
+
+  saveOrder(){
+    return this.http.post(`http://localhost:8080/ingredientes`, { id: 7, description: "teste", value: 2});
   }
 
 }
