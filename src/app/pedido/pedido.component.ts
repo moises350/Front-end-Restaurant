@@ -43,7 +43,6 @@ export class PedidoComponent implements OnInit {
   }
 
   saveOrder(){
-    return this.http.post(`http://localhost:8080/ingredientes`, { id: 7, description: "teste", value: 2});
   }
 
 }

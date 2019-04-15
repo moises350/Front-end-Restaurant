@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu } from '../models/menu.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -13,6 +13,10 @@ export class MenuListComponent implements OnInit {
 
   menus : Menu[] = [];
   menus2 : Menu[] = [];
+
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
 
 
   constructor(private http: HttpClient) { }
@@ -39,6 +43,15 @@ export class MenuListComponent implements OnInit {
   removeOrder(index)
   {
     this.menus2.splice(index,1);
+  }
+
+  saveOrder(){
+    return this.http.post<any>(
+      'http://localhost:8080/pedidos',
+      JSON.stringify({orderDescription: "6tetetettet" ,value: 7.5}),
+      {headers: this.headers}
+      // doenst work =(
+    )
   }
 
 }
